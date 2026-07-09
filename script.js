@@ -1,8 +1,9 @@
-
-const lines=[
+const before = [
 "> Connecting to bachelor-party.service...",
-"",
-"████████████████████ 100%",
+""
+];
+
+const after = [
 "",
 "[ OK ] Groom detected",
 "[ OK ] Groom = Jan Kadlec",
@@ -24,21 +25,92 @@ const lines=[
 "Mission ready.",
 "Press the button below to continue..."
 ];
-let i=0;
-const t=document.getElementById("terminal");
-function type(){
- if(i<lines.length){
-   t.innerHTML+=lines[i]+"\n";
-   window.scrollTo(0,document.body.scrollHeight);
-   i++;
-   setTimeout(type,250);
- }else{
-   document.getElementById("btn").hidden=false;
- }
+
+const t = document.getElementById("terminal");
+
+let i = 0;
+
+function typeBefore() {
+    if (i < before.length) {
+        t.innerHTML += before[i] + "\n";
+        window.scrollTo(0, document.body.scrollHeight);
+        i++;
+        setTimeout(typeBefore, 300);
+    } else {
+        setTimeout(animateBar, 300);
+    }
 }
-type();
-document.getElementById("btn").onclick=()=>{
- document.getElementById("mission").classList.remove("hidden");
- document.getElementById("btn").style.display="none";
- window.scrollTo(0,document.body.scrollHeight);
+
+function animateBar() {
+
+    let percent = 0;
+
+    const interval = setInterval(() => {
+
+        const blocks = Math.floor(percent / 5);
+
+        const bar =
+            "█".repeat(blocks) +
+            "░".repeat(20 - blocks);
+
+        if (document.getElementById("progress")) {
+            document.getElementById("progress").remove();
+        }
+
+        const line = document.createElement("div");
+        line.id = "progress";
+        line.textContent = `${bar} ${percent}%`;
+
+        t.appendChild(line);
+
+        window.scrollTo(0, document.body.scrollHeight);
+
+        percent++;
+
+        if (percent > 100) {
+
+            clearInterval(interval);
+
+            t.innerHTML += "\n";
+
+            typeAfter();
+
+        }
+
+    }, 25);
+
+}
+
+let j = 0;
+
+function typeAfter() {
+
+    if (j < after.length) {
+
+        t.innerHTML += after[j] + "\n";
+
+        window.scrollTo(0, document.body.scrollHeight);
+
+        j++;
+
+        setTimeout(typeAfter, 250);
+
+    } else {
+
+        document.getElementById("btn").hidden = false;
+
+    }
+
+}
+
+typeBefore();
+
+document.getElementById("btn").onclick = () => {
+
+    document.getElementById("mission").classList.remove("hidden");
+
+    document.getElementById("btn").style.display = "none";
+
+    window.scrollTo(0, document.body.scrollHeight);
+
 };
