@@ -4,18 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mission Briefing</title>
+
 <link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+#map{
+    height:500px;
+    margin-top:20px;
+    border-radius:12px;
+    display:none;
+}
+
+#shareLocation{
+    display:block;
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    font-size:20px;
+    cursor:pointer;
+}
+</style>
+
 </head>
+
 <body>
+
 <div id="terminal"></div>
+
 <button id="btn" hidden>Accept Mission</button>
+
 <div id="mission" class="hidden">
+
 <h1>🚀 MISSION ACCEPTED</h1>
+
 <p><b>Destination:</b> CLASSIFIED</p>
 <p><b>Duration:</b> Thursday → Sunday</p>
 <p><b>Country:</b> Austria</p>
 
 <h2>📦 Required dependencies</h2>
+
 <ul>
 <li>🪪 Občanský průkaz</li>
 <li>💶 Eura + karta</li>
@@ -29,10 +61,11 @@
 <li>🧢 Kšiltovka (NUTNOST)</li>
 <li>🕶️ Sluneční brýle (NUTNOST)</li>
 <li>☀️ Opalovací krém (NUTNOST)</li>
-<li>🪥 Hygiena + ručník, možná 2</li>
+<li>🪥 Hygiena + ručník</li>
 </ul>
 
 <h2>⚠ Known Issues</h2>
+
 <pre>
 "Kolik ještě?" ........... WONTFIX
 "Kam jedeme?" ............ 403 Forbidden
@@ -41,6 +74,7 @@
 </pre>
 
 <h2>🔒 Security Policy</h2>
+
 <pre>
 Organizers: root
 Groom: read-only
@@ -50,8 +84,23 @@ Beer = enabled
 Spoilers = disabled
 </pre>
 
+<h2>🗺️ Live Tracking</h2>
+
+<p>
+Sdílej svou polohu během rozlučky.
+</p>
+
+<button id="shareLocation">
+📍 Sdílet moji polohu
+</button>
+
+<div id="map"></div>
+
 <h2>See you on Thursday. 🍻🏔️</h2>
+
 </div>
+
 <script src="script.js"></script>
+
 </body>
 </html>
